@@ -1,15 +1,49 @@
 // Rocket prefab
 class Rocket extends Phaser.GameObjects.Sprite {
-    constructor(scene, x, y, texture, frame) {
+    constructor(scene, x, y, texture, frame, playerNum) {
         super(scene, x, y, texture, frame);
 
         scene.add.existing(this); 
         this.isFiring = false;      
-        this.moveSpeed = 2;         
+        this.moveSpeed = 4;
+        this.playerNum = playerNum;
+        console.log(playerNum);   
         this.sfxRocket = scene.sound.add('sfx_rocket')
+        this.lastX = this.x;
     }
 
-    update() {
+    update()
+    {
+        if(this.playerNum === 1)
+        {
+            this.updatePlayer1();
+        }
+        if(this.playerNum === 2)
+        {
+            this.updatePlayer2();
+        }
+    }
+
+    updatePlayer2() {
+        if(!this.isFiring) {
+            this.x = Phaser.Math.Clamp(game.input.mousePointer.x,
+                borderUISize + this.width,
+                game.config.width - borderUISize - this.width);
+        }
+        var pointer = this.scene.input.activePointer;
+        if(pointer.isDown && !this.isFiring) {
+            this.isFiring = true;
+            this.sfxRocket.play();
+        }
+        if(this.isFiring && this.y >= borderUISize * 3 + borderPadding) {
+            this.y -= this.moveSpeed;
+        }
+        if(this.y <= borderUISize * 3 + borderPadding) {
+            this.reset();
+        }
+    }
+
+    updatePlayer1() {
         if(!this.isFiring) {
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
@@ -30,6 +64,6 @@ class Rocket extends Phaser.GameObjects.Sprite {
     }
     reset() {
         this.isFiring = false;
-        this.y = game.config.height - borderUISize - borderPadding;
+        this.y = game.config.height - borderUISize - borderPadding - 30;
     }
 }

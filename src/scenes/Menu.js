@@ -4,10 +4,10 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('sfx_select', './assets/blip_select12.wav');
-        this.load.audio('sfx_explosion', './assets/explosion38.wav');
-        this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
-        this.load.image('menubg', './assets/menubg.png');
+        this.load.audio('sfx_select', './assets/start.wav');
+        this.load.audio('sfx_explosion', './assets/boom.wav');
+        this.load.audio('sfx_rocket', './assets/meow.wav');
+        this.load.image('menubg', './assets/BG.png');
     }
 
     create() {
@@ -15,10 +15,10 @@ class Menu extends Phaser.Scene {
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'menubg').setOrigin(0, 0);
 
         let menuConfig = {
-            fontFamily: 'Chuck',
+            fontFamily: 'Arial',
             fontSize: '28px',
             backgroundColor: '',
-            color: '#FF6F69',
+            color: '#000000',
             align: 'right',
             padding: {
                 top: 5,
@@ -27,10 +27,10 @@ class Menu extends Phaser.Scene {
             fixedWidth: 0
         }
         let menutwoConfig = {
-          fontFamily: 'Cubano',
+          fontFamily: 'Arial',
           fontSize: '28px',
           backgroundColor: '',
-          color: '#96CEB4',
+          color: '#000000',
           align: 'right',
           padding: {
               top: 5,
@@ -40,34 +40,29 @@ class Menu extends Phaser.Scene {
       }
   
         
-        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use ←→ arrows to move & (F) to fire', menutwoConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - borderUISize - borderPadding, 'PAW PATROL', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2, 'Player 1: Use ←→ arrows to move & (F) to fire', menutwoConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Player 2: Use Mouse to move & Left Click to fire', menutwoConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#FFEEAD';
         menuConfig.color = '#FFEEAD';
-        this.add.text(game.config.width/2, game.config.height/2 + borderUISize + borderPadding, 'Press ← for Novice or → for Expert', menutwoConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + (borderUISize + borderPadding * 5), 'Press ←→, F, or click to start!', menutwoConfig).setOrigin(0.5);
 
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
     }
 
     update() {
-        if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-
-          game.settings = {
-            spaceshipSpeed: 3,
-            gameTimer: 60000    
-          }
-          this.sound.play('sfx_select');
-          this.scene.start("playScene");    
-        }
-        if (Phaser.Input.Keyboard.JustDown(keyRIGHT)) {
-
+        var pointer = this.input.activePointer;
+        if(pointer.isDown || Phaser.Input.Keyboard.JustDown(keyLEFT) ||
+        Phaser.Input.Keyboard.JustDown(keyRIGHT) || Phaser.Input.Keyboard.JustDown(keyF))
+        {
           game.settings = {
             spaceshipSpeed: 4,
             gameTimer: 45000    
           }
           this.sound.play('sfx_select');
-          this.scene.start("playScene");    
+          this.scene.start("playScene");  
         }
       }
 }
