@@ -17,10 +17,10 @@ class Play extends Phaser.Scene {
 
         this.starfield = this.add.tileSprite(0, 0, 500, 500, 'starfield').setOrigin(0, 0);
 
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
-        this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        //this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+        //this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0 ,0);
+        //this.add.rectangle(0, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
+        //this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xFFFFFF).setOrigin(0 ,0);
 
 
         this.p1Rocket = new Rocket(this, 2 * game.config.width/3, game.config.height - borderUISize - borderPadding - 30, 'player1', 0, 1).setOrigin(0.5, 0);
@@ -48,21 +48,21 @@ class Play extends Phaser.Scene {
 
 
         let scoreConfig = {
-            fontFamily: 'Chuck',
+            fontFamily: 'Arial',
             fontSize: '20px',
             backgroundColor: '#FFFFFF',
             color: '#000000',
-            align: 'right',
+            align: 'center',
             padding: {
                 top: 5,
                 bottom: 5,
             },
-            fixedWidth: 125
+            fixedWidth: 150
         }
        
         this.scoreLeft = this.add.text(borderUISize + borderPadding,
              borderUISize + borderPadding*2, "Player 1: " + this.p1Score, scoreConfig);
-        this.scoreRight = this.add.text(game.config.width - (borderUISize + borderPadding) * 7,
+        this.scoreRight = this.add.text(game.config.width - (borderUISize + borderPadding) * 4,
          borderUISize + borderPadding*2, "Player 2: " + this.p2Score, scoreConfig);
 
         this.gameOver = false;
@@ -94,7 +94,7 @@ class Play extends Phaser.Scene {
             this.scene.start("menuScene");
         }
 
-        this.starfield.tilePositionX -= 4;
+        this.starfield.tilePositionX -= 1;
 
         if(!this.gameOver) {
             this.p1Rocket.update();

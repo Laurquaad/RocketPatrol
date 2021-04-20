@@ -27,8 +27,8 @@ class Rocket extends Phaser.GameObjects.Sprite {
     updatePlayer2() {
         if(!this.isFiring) {
             this.x = Phaser.Math.Clamp(game.input.mousePointer.x,
-                borderUISize + this.width,
-                game.config.width - borderUISize - this.width);
+                borderUISize,
+                game.config.width - borderUISize);
         }
         var pointer = this.scene.input.activePointer;
         if(pointer.isDown && !this.isFiring) {
@@ -45,9 +45,9 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
     updatePlayer1() {
         if(!this.isFiring) {
-            if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
+            if(keyLEFT.isDown && this.x >= borderUISize) {
                 this.x -= this.moveSpeed;
-            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize - this.width) {
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - borderUISize) {
                 this.x += this.moveSpeed;
             }
         }
