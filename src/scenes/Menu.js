@@ -12,12 +12,12 @@ class Menu extends Phaser.Scene {
 
     create() {
 
-        this.starfield = this.add.tileSprite(0, 0, 640, 480, 'menubg').setOrigin(0, 0);
+        this.starfield = this.add.tileSprite(0, 0, 500, 500, 'menubg').setOrigin(0, 0);
 
         let menuConfig = {
             fontFamily: 'Arial',
-            fontSize: '28px',
-            backgroundColor: '',
+            fontSize: '22px',
+            backgroundColor: '#FFFFFF',
             color: '#000000',
             align: 'right',
             padding: {
@@ -28,8 +28,8 @@ class Menu extends Phaser.Scene {
         }
         let menutwoConfig = {
           fontFamily: 'Arial',
-          fontSize: '28px',
-          backgroundColor: '',
+          fontSize: '22px',
+          backgroundColor: '#FFFFFF',
           color: '#000000',
           align: 'right',
           padding: {

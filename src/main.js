@@ -11,16 +11,14 @@ Implement mouse control for player movement and mouse click to fire (20)
 */
 let config = {
     type: Phaser.CANVAS,
-    width: 640,
-    height: 480,
+    width: 500,
+    height: 500,
     scene: [ Menu, Play ]
 }
 
 let game = new Phaser.Game(config);
 
-// set UI sizes
 let borderUISize = game.config.height / 15;
 let borderPadding = borderUISize / 3;
 
-// reserve keyboard variables
 let keyF, keyR, keyLEFT, keyRIGHT;
